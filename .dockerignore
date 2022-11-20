@@ -1,0 +1,7 @@
+__pycache__/
+.pytest_cache__/
+videos/
+.gitignore
+Pipfile
+Pipfile.lock
+
