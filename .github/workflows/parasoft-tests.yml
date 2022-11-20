@@ -24,9 +24,10 @@ jobs:
           python-version: '3.8'
       - name: Install dependencies
         run: |
+          apt-get update
+          apt-get install -y python3-pip
           python3 -m pip install --upgrade pip
-          pip install -r local-requirements.txt
-          pip install -e .
+          pip install -r requirements.txt
       - name: Ensure browsers are installed
         run: python -m playwright install --with-deps
       - name: Run your tests
