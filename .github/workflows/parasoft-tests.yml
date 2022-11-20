@@ -30,4 +30,4 @@ jobs:
       - name: Ensure browsers are installed
         run: python -m playwright install --with-deps
       - name: Run your tests
-        run: pytest --browser ${{ browser }} tests/parabank/test_.py
+        run: pytest --browser ${{ matrix.browser }} tests/parabank/test_.py
