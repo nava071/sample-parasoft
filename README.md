@@ -13,6 +13,7 @@ pipenv run pytest -s -v --browser firefox --headed --slowmo 500 --output=.\\resu
 ## Build a docker and run tests
 
 ```  
+# Screenshots and vifdeos are not copied to the host
 git clone https://github.com/nava071/sample-parasoft.git  
 cd sample-parasoft  
 docker build --tag parasoft-tests .  
