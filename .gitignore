@@ -1,5 +1,6 @@
 Pipfile*
 /videos
+/results
 __pycache__/
 .pytest_cache/
 
