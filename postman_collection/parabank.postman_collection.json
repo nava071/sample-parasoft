@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "2554e9ca-cc0b-4c1c-bc0c-277066f2d620",
+		"name": "parabank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14047603"
+	},
+	"item": [
+		{
+			"name": "https://parabank.parasoft.com/parabank/index.htm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response contains a JSESSIONID cookie\", function() {\r",
+							"    pm.expect(pm.cookies.has('JSESSIONID')).to.be.true;\r",
+							"    console.log(pm.cookies);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/index.htm",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"index.htm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://parabank.parasoft.com/parabank/register.htm Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"session id is saved\", function() {\r",
+							"\r",
+							"var responseCookie= postman.getResponseCookie(\"JSESSIONID\");\r",
+							"responseCookie= responseCookie.value.toString();\r",
+							"console.log(responseCookie)\r",
+							"    pm.collectionVariables.set(\"session_id\", responseCookie);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID={{session_id}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/register.htm",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"register.htm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://parabank.parasoft.com/parabank/register.htm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Username saved\", function(){\r",
+							"jsonbody = JSON.stringify(pm.request.body.urlencoded.toObject(true));\r",
+							"uname = JSON.parse(jsonbody)[\"customer.username\"];\r",
+							"pm.collectionVariables.set(\"usrname\", uname);\r",
+							"console.log(\"username: \",pm.collectionVariables.get(\"usrname\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID={{session_id}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "customer.firstName",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						},
+						{
+							"key": "customer.lastName",
+							"value": "{{$randomLastName}}",
+							"type": "text"
+						},
+						{
+							"key": "customer.address.street",
+							"value": "Addressiju8n0sgyt",
+							"type": "text"
+						},
+						{
+							"key": "customer.address.city",
+							"value": "Address1r5luyyxfs",
+							"type": "text"
+						},
+						{
+							"key": "customer.address.state",
+							"value": "Addressj11y5qyo5k",
+							"type": "text"
+						},
+						{
+							"key": "customer.address.zipCode",
+							"value": "675564",
+							"type": "text"
+						},
+						{
+							"key": "customer.phoneNumber",
+							"value": "1019842781",
+							"type": "text"
+						},
+						{
+							"key": "customer.ssn",
+							"value": "101984278",
+							"type": "text"
+						},
+						{
+							"key": "customer.username",
+							"value": "test{{$randomNoun}}",
+							"type": "text"
+						},
+						{
+							"key": "customer.password",
+							"value": "test@123",
+							"type": "text"
+						},
+						{
+							"key": "repeatedPassword",
+							"value": "test@123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/register.htm",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"register.htm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://parabank.parasoft.com/parabank/login.htm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID={{session_id}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{usrname}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "test@123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/login.htm",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"login.htm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://parabank.parasoft.com/parabank/logout.htm",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID={{session_id}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/logout.htm",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"logout.htm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://parabank.parasoft.com/parabank/login.htm Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/login.htm",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"login.htm"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "usrname",
+			"value": ""
+		},
+		{
+			"key": "session_id",
+			"value": ""
+		}
+	]
+}
