@@ -1,6 +1,8 @@
 __pycache__/
 .pytest_cache__/
+postman_collection/
 videos/
+results/
 .gitignore
 Pipfile
 Pipfile.lock
