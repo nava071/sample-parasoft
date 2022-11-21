@@ -5,6 +5,6 @@ COPY . /parasoft
 RUN apt-get update && \
     apt-get install -y python3-pip && \
     python3 -m pip install --upgrade pip && \
-    pip install -r requirements.txt && \
+    pip install --no-cache-dir -r requirements.txt && \
     playwright install --with-deps
-# CMD ['pytest', '-s', '-v', '--browser', 'firefox', '--headed', '--slowmo', '500', '--output=.\output', '--video=on', '--screenshot=only-on-failure']
+ENTRYPOINT ["pytest","-s","-v","--slowmo","500","--output=./results","--video=on","--screenshot=only-on-failure","--browser"]
